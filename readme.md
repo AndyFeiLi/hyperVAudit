@@ -12,13 +12,17 @@ on Hyper-V server (tested on server02 and server03)
 
 open myoutput.txt to get results
 
-to sum up values per client
+to sum up values per client, output to excel
+
+```
+pip install XlsxWriter
+```
 
 ```
 python sum.py
 ```
 
-results returned to console
+output to VM.xlsx and Totals.xlsx
 
 ### Connectwise Manage output Agreement Additions for CPU, RAM, SSD 
 
