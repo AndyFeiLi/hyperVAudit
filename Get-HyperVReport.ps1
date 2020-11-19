@@ -1627,7 +1627,9 @@ ForEach ($VMHostItem in $VMHosts) {
 				$CustomerDic[$VM.name.split("-")[0]] = @{}
 			}
 			
-			add-content -Value $VM.name -path .\myoutput.txt
+			if($VM.State -eq "Running"){
+				add-content -Value $VM.name -path .\myoutput.txt
+			}
 
             # vCPU
             $outVmCPU = $VM.ProcessorCount
@@ -1643,8 +1645,9 @@ ForEach ($VMHostItem in $VMHosts) {
 				[int]$CustomerDic[$VM.name.split("-")[0]]["CPU"] = $temp
 				
 			}
-			
-			add-content -Value $outStringCPU -path .\myoutput.txt
+			if($VM.State -eq "Running"){
+				add-content -Value $outStringCPU -path .\myoutput.txt
+			}
         
             # IS State, Version and Color
             if ($VM.IntegrationServicesState -eq "Up to date")
@@ -2047,7 +2050,7 @@ ForEach ($VMHostItem in $VMHosts) {
 						$totalDisk = $totalDisk + [int]$ssss[1]
 					}
 					
-					#add-content -Value $outStringDisk -path .\myoutput.txt
+					
 					
                     $vmDiskFileSize = sConvert-Size -DiskVolumeSpace $vmDisk.FileSize -DiskVolumeSpaceUnit byte
 
@@ -2161,7 +2164,7 @@ ForEach ($VMHostItem in $VMHosts) {
 							$outStringDisk = $ssss[0]+" "+ $ssss[1]
 					
 							$totalDisk = $totalDisk + [int]$ssss[1]
-							#add-content -Value $outStringDisk -path .\myoutput.txt
+							
 							
 							
                             # For Active VHD file size
@@ -2269,8 +2272,9 @@ ForEach ($VMHostItem in $VMHosts) {
 				
 				##total disk output
 				$totaldiskoutstring = "SSD: "+$totalDisk
-				
-				add-content -Value $totaldiskoutstring -path .\myoutput.txt
+				if($VM.State -eq "Running"){
+					add-content -Value $totaldiskoutstring -path .\myoutput.txt
+				}
 				
 				if($CustomerDic[$VM.name.split("-")[0]]["SSD"] -eq $null){
 					$CustomerDic[$VM.name.split("-")[0]]["SSD"] = [int]$totalDisk
@@ -2336,8 +2340,9 @@ ForEach ($VMHostItem in $VMHosts) {
 					
 				$outStringRAM = $ssss[0]+ " "+$ssss[1]
 				
-				
+				if($VM.State -eq "Running"){
 				add-content -Value $outStringRAM -path .\myoutput.txt
+				}
 				
 				if($CustomerDic[$VM.name.split("-")[0]]["RAM"] -eq $null){
 					$CustomerDic[$VM.name.split("-")[0]]["RAM"] = [int]$ssss[1]
@@ -2377,9 +2382,9 @@ ForEach ($VMHostItem in $VMHosts) {
 					#$ssss[1] = [int]$ssss[1]*1000
 					
 				$outStringRAM = $ssss[0]+ " "+$ssss[1]
-				
+				if($VM.State -eq "Running"){
 				add-content -Value $outStringRAM -path .\myoutput.txt
-				
+				}
 				if($CustomerDic[$VM.name.split("-")[0]]["RAM"] -eq $null){
 					$CustomerDic[$VM.name.split("-")[0]]["RAM"] = [int]$ssss[1]
 				}
