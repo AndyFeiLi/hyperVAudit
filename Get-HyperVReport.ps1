@@ -2043,7 +2043,9 @@ ForEach ($VMHostItem in $VMHosts) {
 					
 					$outStringDisk = $ssss[0]+" "+ $ssss[1]
 					
-					$totalDisk = $totalDisk + [int]$ssss[1]
+					if ($vmDiskPath -like '*Volume1*') { 
+						$totalDisk = $totalDisk + [int]$ssss[1]
+					}
 					
 					#add-content -Value $outStringDisk -path .\myoutput.txt
 					
