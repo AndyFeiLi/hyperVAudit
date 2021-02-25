@@ -227,7 +227,7 @@
 
 		Creates one or more standalone Hyper-V Host(s) report in the working directory.
 
-		.\Get-HyperVReport.ps1 -VMHost Host1,Host2,Host3
+		.\Get-HyperVReport.ps1 -VMHost S2D-SERVER01,S2D-SERVER06
 
 	.EXAMPLE
 
